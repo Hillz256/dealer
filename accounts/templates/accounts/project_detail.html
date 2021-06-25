@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects</title>
+</head>
+<body>
+<h1>My Projects</h1>
+
+  <div>
+    <h3>{{project.title}}</h3>
+    <p>{{project.text}}</p>
+    <a href="#">Send Proposal |</a>
+    <a href="{% url 'project_update' object.id %}"> Update |</a>
+    <a href="{% url 'project_delete' object.id %}"> Delete</a>
+  </div>
+  <div>
+  {% if project.proposals.all %}{% endif %}
+    <h2>Proposals</h2>
+    <hr>
+    {% for proposal in project.proposals.all %}
+      <h3>{{ proposal.author }} - {{ proposal.date_added }}</h3>
+      <p>{{ proposal.body }}</p>
+    {% endfor %}
+  </div>
+  
+</body>
+</html>
