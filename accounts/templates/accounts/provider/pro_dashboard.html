@@ -1,0 +1,14 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block content %}
+  <h1>My Projects</h1>
+  
+  {% for project in projects_list %}
+    <div>
+      <a href="{% url 'project_detail' project.id %}">
+        <h3>{{project.title}}</h3>
+      </a>
+      <p>{{project.text}}</p>
+    </div>
+  {% endfor %}
+{% endblock content %}

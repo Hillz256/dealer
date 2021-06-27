@@ -1,6 +1,8 @@
+from django.db import models
 from django.forms import ModelForm
 from django.forms.widgets import TextInput, Textarea
-from accounts.models import Proposal, Project
+from accounts.models import NewUser, Proposal, Project
+from django.contrib.auth.forms import UserCreationForm
 
 
 class ProjectForm(ModelForm):
@@ -23,3 +25,19 @@ class ProposalForm(ModelForm):
         )
 
         widgets = {"author": TextInput(), "body": Textarea()}
+
+
+class ClientSignUpForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = NewUser
+
+        def save(self, commit=True):
+            user = super().save(commit=False)
+            user.is_client = True
+            user.save()
+            return user
+
+
+class ProviderSignUpForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = NewUser

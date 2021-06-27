@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from accounts.views import (
     ProjectCreateView,
@@ -9,6 +9,8 @@ from accounts.views import (
     AddProposalView,
 )
 
+from accounts.allviews import client, provider
+
 urlpatterns = [
     path("", ProjectListView.as_view(), name="projects"),
     path("project/<int:pk>/", ProjectDetailView.as_view(), name="project_detail"),
@@ -17,5 +19,20 @@ urlpatterns = [
     path("project/<int:pk>/delete", ProjectDeleteView.as_view(), name="project_delete"),
     path(
         "project/<int:pk>/proposal", AddProposalView.as_view(), name="create_proposal"
+    ),
+    path(
+        "accounts/dashboard/client/",
+        client.ClientDashboard.as_view(),
+        name="client_dashboard",
+    ),
+    path(
+        "accounts/dashboard/provider/",
+        provider.ProviderDashboard.as_view(),
+        name="provider_dashboard",
+    ),
+    path(
+        "accounts/dashboard/client/proposals",
+        client.ProposalListView.as_view(),
+        name="proposals",
     ),
 ]

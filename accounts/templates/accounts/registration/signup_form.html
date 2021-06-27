@@ -1,0 +1,11 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block content %}
+  <h1>Sign up today and find {{ user_type }}</h1>
+
+  <form method='POST'>
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Sign Up</button>
+  </form>
+{% endblock content %}

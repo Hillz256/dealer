@@ -16,7 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from accounts.allviews import accounts, client, provider
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("accounts.urls")),
+    path("accounts/signup/", accounts.SignUpView.as_view(), name="signup"),
+    path(
+        "accounts/signup/client/",
+        client.ClientSignUpView.as_view(),
+        name="client_signup",
+    ),
+    path(
+        "accounts/signup/service-provider/",
+        provider.ProviderSignUpView.as_view(),
+        name="provider_signup",
+    ),
 ]

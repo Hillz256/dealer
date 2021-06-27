@@ -1,0 +1,14 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block content %}
+  <h1>Recieved Proposals</h1>
+  
+  {% for proposal in proposals %}
+    <div>
+      <a href="#">
+        <h3>{{proposal.project.title}} by {{ proposal.author }}</h3>
+      </a>
+      <p>{{ proposal.body }}</p>
+    </div>
+  {% endfor %}
+{% endblock content %}
