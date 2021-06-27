@@ -35,3 +35,6 @@ class Proposal(models.Model):
 
     def __str__(self):
         return "%s - %s" % (self.project.title, self.author)
+
+    def get_absolute_url(self):
+        return reverse("project_detail", kwargs={"pk": self.pk})
