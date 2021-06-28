@@ -1,3 +1,4 @@
+from django.db import reset_queries
 from accounts.models import Project, Proposal
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -15,6 +16,10 @@ from accounts.forms import ProjectForm, ProposalForm
 # Create your views here.
 
 
+def home(request):
+    return render(request, "accounts/index.html")
+
+
 class ProjectListView(ListView):
     model = Project
     ordering = "-date_added"
@@ -30,6 +35,10 @@ class ProjectCreateView(CreateView):
     model = Project
     form_class = ProjectForm
 
+    def form_valid(self, form):
+        form.instance.client = self.request.user
+        return super().form_valid(form)
+
 
 class ProjectUpdateView(UpdateView):
     model = Project
@@ -42,13 +51,3 @@ class ProjectUpdateView(UpdateView):
 class ProjectDeleteView(DeleteView):
     model = Project
     success_url = "/"
-
-
-class AddProposalView(CreateView):
-    model = Proposal
-    form_class = ProposalForm
-    success_url = "/"
-
-    def form_valid(self, form):
-        form.instance.project_id = self.kwargs["pk"]
-        return super().form_valid(form)

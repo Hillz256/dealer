@@ -14,6 +14,7 @@ class NewUser(AbstractUser):
 class Project(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
+    client = models.ForeignKey(NewUser, blank=True, null=True, on_delete=models.CASCADE)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

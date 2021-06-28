@@ -32,4 +32,7 @@ urlpatterns = [
         provider.ProviderSignUpView.as_view(),
         name="provider_signup",
     ),
+    path("dealer/login/", accounts.LoginView.as_view(), name="login"),
+    path("dealer/login/user/", accounts.UserLoginView, name="user_login"),
+    path("dealer/logout/", accounts.LogoutView, name="logout"),
 ]

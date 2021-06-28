@@ -2,8 +2,8 @@ from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.views.generic import CreateView, ListView
 
-from accounts.models import NewUser, Project
-from accounts.forms import ProviderSignUpForm
+from accounts.models import NewUser, Project, Proposal
+from accounts.forms import ProviderSignUpForm, ProposalForm
 
 
 class ProviderSignUpView(CreateView):
@@ -28,3 +28,14 @@ class ProviderDashboard(ListView):
     context_object_name = "projects_list"
     ordering = ("-date_added",)
     template_name = "accounts/provider/pro_dashboard.html"
+
+
+class ProposalCreateView(CreateView):
+    model = Proposal
+    form_class = ProposalForm
+    success_url = "/"
+
+    def form_valid(self, form):
+        form.instance.project_id = self.kwargs["pk"]
+        form.instance.author = self.request.user
+        return super().form_valid(form)

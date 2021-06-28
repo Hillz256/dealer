@@ -4,7 +4,7 @@ from django.contrib.auth import login
 from django.db.models import Count
 
 from accounts.models import NewUser, Project, Proposal
-from accounts.forms import ClientSignUpForm
+from accounts.forms import ClientSignUpForm, ProposalForm
 
 
 class ClientSignUpView(CreateView):

@@ -1,15 +1,18 @@
 {% extends 'accounts/base.html' %}
 {% load static %}
 {% block content %}
-  <h1>Sign up for a free account today!</h1>
+  <h1>Login to your account!</h1>
 
-  <h3>Select the type of account you want to create </h3>
   <div>
     <h4>Client login</h4>
-    <a href="{% url 'provider_signup' %}">Login</a>
+    <a href="{% url 'user_login' %}">Login</a>
   </div>
   <div>
     <h4>Freelancer login</h4>
-    <a href="{% url 'client_signup' %}">Login</a>
+    <a href="{% url 'user_login' %}">Login</a>
+  </div>
+  <hr>
+  <div>
+    <p><a href="{% url 'signup' %}">Register</a> an account!</p>
   </div>
 {% endblock content %}

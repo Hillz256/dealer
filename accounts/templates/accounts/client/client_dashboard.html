@@ -1,9 +1,23 @@
 {% extends 'accounts/base.html' %}
 {% load static %}
 {% block content %}
-  <h1>Create a Gig</h1>
-  <a href="{% url 'create-project' %}">Post a Gig</a>
+  <h1>{{request.user}} Dashboard</h1>
+
+  <ul>
+    <li><a href="{% url 'create-project' %}">Post a Gig</a></li>
+    <li> <a href="{% url 'proposals' %}">Proposals</a></li>
+  </ul>
   <hr>
-  <a href="{% url 'proposals' %}">Proposals</a>
+  <h3>MY PROJECTS</h3>
+  {% for project in projects %}
+    {% if request.user == project.client %}
+      <div>
+        <a href=" {% url 'project_detail' project.id %} ">
+          <h3>{{project.title}}</h3>
+        </a>
+        <p>{{ project.text }}</p>
+      </div>
+    {% endif %}
+  {% endfor %}
   
 {% endblock content %}

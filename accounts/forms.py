@@ -19,10 +19,7 @@ class ProjectForm(ModelForm):
 class ProposalForm(ModelForm):
     class Meta:
         model = Proposal
-        fields = (
-            "author",
-            "body",
-        )
+        fields = ("body",)
 
         widgets = {"author": TextInput(), "body": Textarea()}
 
